@@ -1,9 +1,11 @@
 import http from "http";
-import express, { Express } from "express";
+import express, { Express, Router } from "express";
 import morgan from "morgan";
-import routes from "./routes/blogPost";
+import contentRoutes from "./routes/content/index";
 
 const router: Express = express();
+
+const basePath = "/api/v1";
 
 /** Logging */
 router.use(morgan("dev"));
@@ -30,7 +32,12 @@ router.use((req, res, next) => {
 });
 
 /** Routes */
-router.use("/api/v1", routes);
+const initRoutes = (nodeRoute: { name: string; routes: Router[] }) =>
+  nodeRoute.routes.map((route: Router) =>
+    router.use(`${basePath}/${nodeRoute.name}`, route)
+  );
+
+initRoutes(contentRoutes);
 
 /** Error handling */
 router.use((req, res, next) => {
