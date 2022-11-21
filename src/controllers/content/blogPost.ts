@@ -2,10 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import axios, { AxiosResponse } from "axios";
 
 interface Post {
-  userId: Number;
   id: Number;
+  contentCategorys: [String];
   title: String;
   body: String;
+  referenceBlogs: [String];
 }
 
 // getting all posts

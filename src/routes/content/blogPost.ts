@@ -1,5 +1,5 @@
 import express from "express";
-import controller from "../controllers/blogPost";
+import { blogPost as controller } from "../../controllers/content";
 const router = express.Router();
 
 router.get("/blogPost", controller.getPosts);
