@@ -1,7 +1,8 @@
 import http from "http";
 import express, { Express, Router } from "express";
 import morgan from "morgan";
-import contentRoutes from "./routes/content/index";
+import { contentRoutes, profileRoutes, accountRoutes } from "./routes";
+require("dotenv").config();
 
 const router: Express = express();
 
@@ -38,6 +39,8 @@ const initRoutes = (nodeRoute: { name: string; routes: Router[] }) =>
   );
 
 initRoutes(contentRoutes);
+initRoutes(profileRoutes);
+initRoutes(accountRoutes);
 
 /** Error handling */
 router.use((req, res, next) => {
